@@ -1,0 +1,115 @@
+spring:
+  cloud:
+    config:
+      allow-override: true
+      override-none: false
+      override-system-properties: false
+  data:
+    web:
+      pageable:
+        max-page-size: 1000
+  redis:
+    host: redis
+    port: 6379
+    ssl: false
+    timeout: 15000
+    lettuce:
+      pool:
+        max-active: 50
+        min-idle: 2
+        max-idle: 20
+  flyway:
+    schemas: ${spring.jpa.properties.hibernate.default_schema}
+  datasource:
+    # Adres bazy lokalny
+    url: jdbc:postgresql://host.docker.internal:5432/shop
+    username: postgres
+    password: 19Pie_sek/02
+    hikari:
+      maximum-pool-size: 20
+
+server:
+  port: 8080
+  max-http-header-size: 1MB
+  compression:
+    enabled: true
+    mime-types: application/json
+    min-response-size: 256
+  tomcat:
+    mbeanregistry:
+      enabled: true
+    max-connections: 10000
+    accept-count: 500
+    threads:
+      max: 1000
+      min-spare: 50
+
+ribbon:
+  ConnectTimeout: 30000
+  ReadTimeout: 60000
+  MaxTotalHttpConnections: 1500
+  MaxHttpConnectionsPerHost: 1000
+  eureka:
+    enabled: true
+zuul:
+  host:
+    socket-timeout-millis: 70000
+    max-total-connections: 8000
+    max-per-route-connections: 2500
+  routes.file:
+    readTimeout: 90000
+    connectTimeout: 90000
+
+hystrix.command.default:
+  execution:
+    isolation:
+      strategy: SEMAPHORE
+      semaphore.maxConcurrentRequests: 100000
+      thread.timeoutInMilliseconds: 180000
+    timeout.enabled: false
+  circuitBreaker.enabled: false
+  fallback.enabled: false
+
+spring.servlet.multipart:
+  max-file-size: 250MB
+  max-request-size: 250MB
+
+spring.jackson.serialization.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS: false
+
+spring.kafka.bootstrap-servers: kafka:9092
+spring.cloud.stream:
+  default-binder: kafka
+  kafka.binder:
+    zkNodes: zookeeper
+    brokers: kafka
+    defaultZkPort: 2181
+    defaultBrokerPort: 9092
+    autoAddPartitions: true
+    configuration:
+      max.request.size: 2097152
+
+spring.jpa:
+  show-sql: false
+  properties.hibernate.temp.use_jdbc_metadata_defaults: false
+
+bit.api.services:
+  user.url: http://user:8080
+  auth.url: http://auth:8080
+
+feign.service.name:
+  account: user
+  users: group
+  oauth2-direct-token: auth
+
+security.oauth2.resource.user-info-uri: http://auth:8080/me
+
+eureka:
+  client:
+    service-url: {defaultZone: http://shop-eureka:8761/eureka}
+    fetch-registry: true
+  instance:
+    lease-renewal-interval-in-seconds: 10
+#    hostName: ${HOSTNAME}
+
+feign.hystrix.enabled: false
+

@@ -1,0 +1,33 @@
+server.tomcat.threads.min-spare: 200
+
+security:
+  oauth2:
+    access-token-validity-seconds: 86400
+    allow-direct-login: true
+    clients:
+      UNKNOWN.access-token-validity-seconds: 86400
+      OPERATOR.access-token-validity-seconds: 86400
+      PUBLIC.access-token-validity-seconds: 86400
+      MOBILE.access-token-validity-seconds: 86400
+
+      UNKNOWN.refresh-token-validity-seconds: 86400
+      OPERATOR.refresh-token-validity-seconds: 86400
+      PUBLIC.refresh-token-validity-seconds: 86400
+      MOBILE.refresh-token-validity-seconds: 86400
+
+ldap:
+  sources:
+    shop:
+      base: ou=users,dc=shop,dc=pl
+      url: ldap://openldap:389
+      user: uid=ldapconnector,dc=shop,dc=pl
+      password: ldapconnector
+      passwordPolicyDn: cn=BITPPolicy,ou=Policies,dc=bit,dc=pl
+      query:
+        objectClass: person
+        identifier: sn
+      identifierKey: cn
+      identifierValue: ID
+      authenticator: CONTEXT
+      errorParser: OPEN_LDAP
+      credentialsVerifier: DIRECT

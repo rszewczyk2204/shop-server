@@ -1,0 +1,13 @@
+server.tomcat.threads.min-spare: 200
+i18n.supported-locales: pl,en,en_GB,en_US,en_CA,de,de_DE
+ldap.identifier: shop
+profile.fallback.setup.scheduler.cron: 0 */10 * ? * *
+
+spring:
+  cloud.stream.bindings:
+    archive.contentType: "application/json;charset: UTF-8"
+    client-platform-activity-stream.destination: empty-queue
+  datasource.hikari.maximum-pool-size: 40
+  flyway.out-of-order: true
+  flyway.locations: classpath:db/migration
+  jpa.properties.hibernate.default_schema: users
