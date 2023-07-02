@@ -105,11 +105,18 @@ security.oauth2.resource.user-info-uri: http://auth:8080/me
 
 eureka:
   client:
-    service-url: {defaultZone: http://shop-eureka:8761/eureka}
-    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://shop-eureka:8761/eureka
   instance:
-    lease-renewal-interval-in-seconds: 10
-#    hostName: ${HOSTNAME}
+    preferIpAddress: false
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+    instanceId: ${HOSTNAME}:${spring.application.name}:${server.port}
+    hostName: ${HOSTNAME}
+  server:
+    peer-node-read-timeout-ms: 10000
+    expected-client-renewal-interval-seconds: 30
 
+ribbon.eureka.enabled: true
 feign.hystrix.enabled: false
 
