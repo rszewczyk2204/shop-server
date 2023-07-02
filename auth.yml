@@ -15,6 +15,27 @@ security:
       PUBLIC.refresh-token-validity-seconds: 86400
       MOBILE.refresh-token-validity-seconds: 86400
 
+      PUBLIC.client-id: publicClientId
+      PUBLIC.client-secret: publicClientSecret
+      PUBLIC.scope: openid
+      PUBLIC.resource-ids: openid
+      PUBLIC.authorized-grant-types: refresh_token,password
+      PUBLIC.auto-approve-scopes: openid
+
+      OPERATOR.client-id: operatorClientId
+      OPERATOR.client-secret: operatorClientSecret
+      OPERATOR.scope: openid
+      OPERATOR.resource-ids: openid
+      OPERATOR.authorized-grant-types: refresh_token,password
+      OPERATOR.auto-approve-scopes: openid
+
+      UNKNOWN.client-id: clientId
+      UNKNOWN.client-secret: clientSecret
+      UNKNOWN.scope: openid
+      UNKNOWN.resource-ids: openid
+      UNKNOWN.authorized-grant-types: refresh_token,password
+      UNKNOWN.auto-approve-scopes: openid
+
 ldap:
   sources:
     shop:
