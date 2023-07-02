@@ -36,6 +36,13 @@ security:
       UNKNOWN.authorized-grant-types: refresh_token,password
       UNKNOWN.auto-approve-scopes: openid
 
+      MOBILE.client-id: mobileId
+      MOBILE.client-secret: mobileSecret
+      MOBILE.scope: openid
+      MOBILE.resource-ids: openid
+      MOBILE.authorized-grant-types: refresh_token,password
+      MOBILE.auto-approve-scopes: openid
+
 ldap:
   sources:
     shop:
